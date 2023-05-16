@@ -18,4 +18,13 @@ void selectionsort(int *array, int tamanho) {
     }
 }
 
-void insertionsort(int *array, int tamanho) {}
+void insertionsort(int *array, int tamanho) {
+    int j;
+    for (int i = 1; i < tamanho; i++) {
+        int valor_atual = array[i];
+        for (j = i; j > 0 && array[j - 1] > valor_atual; j--) {
+            array[j] = array[j - 1];
+        }
+        array[j] = valor_atual;
+    }
+}

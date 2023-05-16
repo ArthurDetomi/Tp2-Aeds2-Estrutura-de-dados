@@ -1,10 +1,17 @@
 #include <stdio.h>
 #include "ordenacoes.h"
+#include <stdlib.h>
+#include <time.h>
+#define TAM 1000
 
 int main(void) {
-    int array[] = { 5, 6, 9, 1, 2 };
-    selectionsort(array, 5);
-    for (int i = 0; i < 5; i++) {
+    int array[TAM];
+    for (int i = 0; i < TAM; i++) {
+        int numero_aleatorio = rand() % 1000 + 1;
+        array[i] = numero_aleatorio;
+    }
+    selectionsort(array, TAM);
+    for (int i = 0; i < TAM; i++) {
         printf("%d\n", array[i]);
     }
     return 0;
