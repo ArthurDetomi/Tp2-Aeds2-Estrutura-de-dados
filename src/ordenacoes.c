@@ -145,3 +145,27 @@ void mergesort(int *array, int inicio, int tamanho) {
         merge(array, inicio, meio, tamanho);
     }
 }
+
+void shellsort(int *array, int tamanho) {
+    int i, j;
+    int intervalo = 1;
+    int elemento_atual;
+    do {
+        intervalo = intervalo * 3 + 1;
+    } while (intervalo < tamanho);
+    do {
+        intervalo /= 3;
+        for (i = intervalo; i <= tamanho; i++) {
+            elemento_atual = array[i];
+            j = i;
+            while (array[j - intervalo] > elemento_atual) {
+                array[j] = array[j - intervalo];
+                j -= intervalo;
+                if (j <= intervalo) {
+                    break;
+                }
+            }
+            array[j] = elemento_atual;
+        }
+    } while (intervalo != 1);
+}

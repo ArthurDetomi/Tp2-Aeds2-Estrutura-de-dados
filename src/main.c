@@ -2,7 +2,7 @@
 #include "ordenacoes.h"
 #include <stdlib.h>
 #include <time.h>
-#define TAM 100000
+#define TAM 100
 
 int main(void) {
     int array[TAM];
@@ -10,7 +10,8 @@ int main(void) {
         int numero_aleatorio = rand() % TAM + 1;
         array[i] = numero_aleatorio;
     }
-    mergesort(array, 0, TAM);
+    shellsort(array, TAM);
+    // mergesort(array, 0, TAM);
     // quicksort(array, 0, TAM);
     // selectionsort(array, TAM);
     // insertionsort(array, TAM);
