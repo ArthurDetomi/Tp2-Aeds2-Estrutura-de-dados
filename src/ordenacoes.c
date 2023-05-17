@@ -28,3 +28,35 @@ void insertionsort(int *array, int tamanho) {
         array[j] = valor_atual;
     }
 }
+
+int particiona(int *array, int inicio, int final) {
+    int esq, dir, pivo;
+    esq = inicio;
+    dir = final;
+    pivo = array[inicio];
+    while (esq < dir) {
+        while (esq <= final && array[esq] <= pivo) {
+            esq++;
+        }
+        while (dir >= 0 && array[dir] > pivo) {
+            dir--;
+        }
+        if (esq < dir) {
+            int aux = array[esq];
+            array[esq] = array[dir];
+            array[dir] = aux;
+        }
+    }
+    array[inicio] = array[dir];
+    array[dir] = pivo;
+    return dir;
+}
+
+void quicksort(int *array, int inicio, int fim) {
+    int pivo;
+    if (fim > inicio) {
+        pivo = particiona(array, inicio, fim);
+        quicksort(array, inicio, pivo - 1);
+        quicksort(array, pivo + 1, fim);
+    }
+}

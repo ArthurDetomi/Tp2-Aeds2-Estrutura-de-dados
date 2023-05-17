@@ -2,17 +2,17 @@
 #include "ordenacoes.h"
 #include <stdlib.h>
 #include <time.h>
-#define TAM 1000
+#define TAM 100000
 
 int main(void) {
     int array[TAM];
     for (int i = 0; i < TAM; i++) {
-        int numero_aleatorio = rand() % 1000 + 1;
+        int numero_aleatorio = rand() % TAM + 1;
         array[i] = numero_aleatorio;
     }
-    selectionsort(array, TAM);
-    for (int i = 0; i < TAM; i++) {
-        printf("%d\n", array[i]);
-    }
+    quicksort(array, 0, TAM);
+    // selectionsort(array, TAM);
+    // insertionsort(array, TAM);
+    
     return 0;
 }
