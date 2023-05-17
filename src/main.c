@@ -10,7 +10,8 @@ int main(void) {
         int numero_aleatorio = rand() % TAM + 1;
         array[i] = numero_aleatorio;
     }
-    quicksort(array, 0, TAM);
+    mergesort(array, 0, TAM);
+    // quicksort(array, 0, TAM);
     // selectionsort(array, TAM);
     // insertionsort(array, TAM);
     
