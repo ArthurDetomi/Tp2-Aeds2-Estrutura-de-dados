@@ -29,8 +29,8 @@ elemento *gerar_array(int tipo_ordenacao, int tamanho) {
             return array;
         break;
         case ORDEM_DECRESCENTE:
-            for (int i = (tamanho + 1); i >= 1; i--) {
-                array[i].chave = i;
+            for (int i = (tamanho + 1), pos = 0; i >= 1; i--, pos++) {
+                array[pos].chave = i;
             }
             return array;
         break;
