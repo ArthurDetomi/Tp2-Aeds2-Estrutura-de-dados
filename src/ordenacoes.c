@@ -1,117 +1,145 @@
 #include "ordenacoes.h"
 
 #include <math.h>
+#include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
-void selectionsort(int *array, int tamanho) {
+void selectionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes) {
     for (int i = 0; i < tamanho - 1; i++) {
         int pos_menor = i;
         for (int j = i + 1; j < tamanho; j++) {
-            if (array[j] < array[pos_menor]) {
+            (*comparacoes)++;
+            if (elementos[j].chave < elementos[pos_menor].chave) {
                 pos_menor = j;
             }
         }
+        (*comparacoes)++;
         if (pos_menor != i) {
-            int aux = array[i];
-            array[i] = array[pos_menor];
-            array[pos_menor] = aux;
+            elemento aux = elementos[i];
+            elementos[i] = elementos[pos_menor];
+            elementos[pos_menor] = aux;
+            (*movimentacoes) += 3;
         }
     }
 }
 
-void insertionsort(int *array, int tamanho) {
+void insertionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes) {
     int j;
     for (int i = 1; i < tamanho; i++) {
-        int valor_atual = array[i];
-        for (j = i; j > 0 && array[j - 1] > valor_atual; j--) {
-            array[j] = array[j - 1];
+        elemento valor_atual = elementos[i];
+        for (j = i; j > 0 && elementos[j - 1].chave > valor_atual.chave; j--) {
+            (*comparacoes)++;
+            elementos[j] = elementos[j - 1];
+            (*movimentacoes)++;
         }
-        array[j] = valor_atual;
+        elementos[j] = valor_atual;
+        (*movimentacoes) += 2;
     }
 }
 
-int particiona(int *array, int inicio, int final) {
-    int esq, dir, pivo;
+int particiona(elemento *elementos, int inicio, int final, int *movimentacoes, int *comparacoes) {
+    int esq, dir;
     esq = inicio;
     dir = final;
-    pivo = array[inicio];
+    elemento pivo = elementos[inicio];
+    (*movimentacoes)++;
     while (esq < dir) {
-        while (esq <= final && array[esq] <= pivo) {
+        while (esq <= final && elementos[esq].chave <= pivo.chave) {
             esq++;
+            (*comparacoes)++;
         }
-        while (dir >= 0 && array[dir] > pivo) {
+        while (dir >= 0 && elementos[dir].chave > pivo.chave) {
             dir--;
+            (*comparacoes)++;
         }
+        (*comparacoes)++;
         if (esq < dir) {
-            int aux = array[esq];
-            array[esq] = array[dir];
-            array[dir] = aux;
+            elemento aux = elementos[esq];
+            elementos[esq] = elementos[dir];
+            elementos[dir] = aux;
+            (*movimentacoes) += 3;
         }
     }
-    array[inicio] = array[dir];
-    array[dir] = pivo;
+    elementos[inicio] = elementos[dir];
+    elementos[dir] = pivo;
+    (*movimentacoes) += 2;
     return dir;
 }
 
-void quicksort(int *array, int inicio, int fim) {
+void quicksort(elemento *elementos, int inicio, int fim, int *movimentacoes, int *comparacoes) {
     int pivo;
     if (fim > inicio) {
-        pivo = particiona(array, inicio, fim);
-        quicksort(array, inicio, pivo - 1);
-        quicksort(array, pivo + 1, fim);
+        (*comparacoes)++;
+        pivo = particiona(elementos, inicio, fim, movimentacoes, comparacoes);
+        quicksort(elementos, inicio, pivo - 1, movimentacoes, comparacoes);
+        quicksort(elementos, pivo + 1, fim, movimentacoes, comparacoes);
     }
 }
 
-void criaheap(int *array, int pai, int fim) {
-    int aux = array[pai];
+void criaheap(elemento *elementos, int pai, int fim, int *movimentacoes, int *comparacoes) {
+    elemento aux = elementos[pai];
+
+    (*movimentacoes)++;
+
     int filho = 2 * pai + 1;
     while (filho <= fim) {
+        (*comparacoes)++;
         if (filho < fim) {
-            if (array[filho] < array[filho + 1]) {
+            (*comparacoes)++;
+            if (elementos[filho].chave < elementos[filho + 1].chave) {
                 filho++;
             }
         }
-        if (aux < array[filho]) {
-            array[pai] = array[filho];
+        (*comparacoes)++;
+        if (aux.chave < elementos[filho].chave) {
+            elementos[pai] = elementos[filho];
             pai = filho;
             filho = 2 * pai + 1;
+            (*movimentacoes)++;
         }
         else {
             filho = fim + 1;
         }
     }
-    array[pai] = aux;
+    elementos[pai] = aux;
+    (*movimentacoes)++;
 }
 
-void heapsort(int *array, int tamanho) {
+void heapsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes) {
     int i;
     for (i = (tamanho - 1) / 2; i >= 0; i--) {
-        criaheap(array, i, tamanho - 1);
+        criaheap(elementos, i, tamanho - 1, movimentacoes, comparacoes);
     }
     for (i = tamanho - 1; i >= 1; i--) {
-        int aux = array[0];
-        array[0] = array[i];
-        array[i] = aux;
-        criaheap(array, 0, i - 1);
+        elemento aux = elementos[0];
+        elementos[0] = elementos[i];
+        elementos[i] = aux;
+        (*movimentacoes) += 3;
+        criaheap(elementos, 0, i - 1, movimentacoes, comparacoes);
     }
 }
 
-void merge(int *array, int inicio, int meio, int fim) {
-    int *temp, p1, p2, tamanho, i, j, k;
+void merge(elemento *elementos, int inicio, int meio, int fim, int *movimentacoes, int *comparacoes) {
+    int p1, p2, tamanho, i, j, k;
     int fim1 = 0, fim2 = 0;
     tamanho = fim - inicio + 1;
     p1 = inicio;
     p2 = meio + 1;
 
-    temp = (int *)malloc(tamanho * sizeof(int));
+    elemento *temp = (elemento *)malloc(tamanho * sizeof(elemento));
     if (temp != NULL) {
         for (i = 0; i < tamanho; i++) {
+            (*comparacoes)++;
             if (!fim1 && !fim2) {
-                if (array[p1] < array[p2]) {
-                    temp[i] = array[p1++];
+                (*comparacoes)+=3;
+                if (elementos[p1].chave < elementos[p2].chave) {
+                    temp[i] = elementos[p1++];
+                    (*movimentacoes)++;
                 }
                 else {
-                    temp[i] = array[p2++];
+                    temp[i] = elementos[p2++];
+                    (*movimentacoes)++;
                 }
                 if (p1 > meio) {
                     fim1 = 1;
@@ -121,51 +149,70 @@ void merge(int *array, int inicio, int meio, int fim) {
                 }
             }
             else {
+                (*comparacoes)++;
                 if (!fim1) {
-                    temp[i] = array[p1++];
+                    temp[i] = elementos[p1++];
+                    (*movimentacoes)++;
                 }
                 else {
-                    temp[i] = array[p2++];
+                    temp[i] = elementos[p2++];
+                    (*movimentacoes)++;
                 }
             }
         }
     }
     for (j = 0, k = inicio; j < tamanho; j++, k++) {
-        array[k] = temp[j];
+        elementos[k] = temp[j];
+        (*movimentacoes)++;
     }
     free(temp);
 }
 
-void mergesort(int *array, int inicio, int tamanho) {
+void mergesort(elemento *elementos, int inicio, int tamanho, int *movimentacoes, int *comparacoes) {
     int meio;
     if (inicio < tamanho) {
+        (*comparacoes)++;
         meio = floor((inicio + tamanho) / 2);
-        mergesort(array, inicio, meio);
-        mergesort(array, meio + 1, tamanho);
-        merge(array, inicio, meio, tamanho);
+        mergesort(elementos, inicio, meio, movimentacoes, comparacoes);
+        mergesort(elementos, meio + 1, tamanho, movimentacoes, comparacoes);
+        merge(elementos, inicio, meio, tamanho, movimentacoes, comparacoes);
     }
 }
 
-void shellsort(int *array, int tamanho) {
+void shellsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes) {
     int i, j;
     int intervalo = 1;
-    int elemento_atual;
+    elemento elemento_atual;
     do {
         intervalo = intervalo * 3 + 1;
     } while (intervalo < tamanho);
     do {
         intervalo /= 3;
         for (i = intervalo; i <= tamanho; i++) {
-            elemento_atual = array[i];
+            elemento_atual = elementos[i];
             j = i;
-            while (array[j - intervalo] > elemento_atual) {
-                array[j] = array[j - intervalo];
+            while (elementos[j - intervalo].chave > elemento_atual.chave) {
+                elementos[j] = elementos[j - intervalo];
+                (*movimentacoes)++;
                 j -= intervalo;
+                (*comparacoes) += 2;
                 if (j <= intervalo) {
                     break;
                 }
             }
-            array[j] = elemento_atual;
+            elementos[j] = elemento_atual;
+            (*movimentacoes)+=2;
         }
     } while (intervalo != 1);
 }
+
+char *nome_ordenacoes_disponiveis(int num) {
+    if (num > 5 || num < 0) {
+        return NULL;
+    }
+    char ordenacoes[][50] = {"SelectionSort", "InsertionSort", "ShellSort", "QuickSort", "HeapSort", "MergeSort"};
+    int tam_str = strlen(ordenacoes[num]);
+    char *nome_ordenacao = (char*) malloc((tam_str + 1) * sizeof(char));
+    strcpy(nome_ordenacao, ordenacoes[num]);
+    return nome_ordenacao;
+}    
