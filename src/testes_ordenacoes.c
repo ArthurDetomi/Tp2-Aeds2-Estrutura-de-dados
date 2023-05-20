@@ -6,11 +6,11 @@
 #include <string.h>
 #include <sys/resource.h>
 #include <time.h>
-#define TAM_1 20
-#define TAM_2 500
-#define TAM_3 5000
-#define TAM_4 10000
-#define TAM_5 200000
+#define TAM_20 20
+#define TAM_500 500
+#define TAM_5000 5000
+#define TAM_10000 10000
+#define TAM_200000 200000
 
 elemento *gerar_array(int tipo_ordenacao, int tamanho) {
     elemento *array = (elemento *)malloc(tamanho * sizeof(elemento));
@@ -108,11 +108,11 @@ void iniciar_teste(algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste orde
         printf("Erro: Codigos invalidos\n");
         return;
     }
-    iniciar_teste_especifico( TAM_1, "Teste com 20 elementos", alg_escolhido, ordem_escolha);
-    iniciar_teste_especifico( TAM_2, "Teste com 500 elementos", alg_escolhido, ordem_escolha);
-    iniciar_teste_especifico( TAM_3, "Teste com 5000 elementos", alg_escolhido, ordem_escolha);
-    iniciar_teste_especifico( TAM_4, "Teste com 10000 elementos", alg_escolhido, ordem_escolha);
-    iniciar_teste_especifico( TAM_5, "Teste com 200000 elementos", alg_escolhido, ordem_escolha);
+    iniciar_teste_especifico( TAM_20, "Teste com 20 elementos", alg_escolhido, ordem_escolha);
+    iniciar_teste_especifico( TAM_500, "Teste com 500 elementos", alg_escolhido, ordem_escolha);
+    iniciar_teste_especifico( TAM_5000, "Teste com 5000 elementos", alg_escolhido, ordem_escolha);
+    iniciar_teste_especifico( TAM_10000, "Teste com 10000 elementos", alg_escolhido, ordem_escolha);
+    iniciar_teste_especifico( TAM_200000, "Teste com 200000 elementos", alg_escolhido, ordem_escolha);
 }
 
 char *nome_condicao_ordenacao(int num) {
