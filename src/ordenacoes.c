@@ -42,7 +42,7 @@ int particiona(elemento *elementos, int inicio, int final, int *movimentacoes, i
     int esq, dir;
     esq = inicio;
     dir = final;
-    elemento pivo = elementos[inicio];
+    elemento pivo = elementos[(inicio + final) / 2];
     (*movimentacoes)++;
     while (esq < dir) {
         while (esq <= final && elementos[esq].chave <= pivo.chave) {
