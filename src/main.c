@@ -7,7 +7,7 @@ int main(void) {
     int algoritmo_escolha, cod_condicao;
     printf("Bem vindo ao programa de testes de algoritmos de ordenacao\n");
     printf("Qual algoritmo deseja testar:\n");
-    for (int i = 0; i < 5; i++) {
+    for (int i = 0; i < 6; i++) {
         char *nome_ordenacao = nome_ordenacoes_disponiveis(i);
         printf("codigo = %d - %s\n", i, nome_ordenacao);
         free(nome_ordenacao);
