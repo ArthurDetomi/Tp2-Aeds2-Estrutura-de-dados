@@ -2,15 +2,6 @@
 #define TESTES_ORDENACOES_H
 #include "ordenacoes.h"
 
-struct elemento_pequeno_tipo {
-    int chave;
-} typedef elemento_pequeno;
-
-struct elemento_grande_tipo {
-    int chave;
-    char *str;
-} typedef elemento_grande;
-
 enum tipo_ordenacao_teste_tipo_el {
     ORDEM_ALEATORIA = 0,
     ORDEM_CRESCENTE = 1,
