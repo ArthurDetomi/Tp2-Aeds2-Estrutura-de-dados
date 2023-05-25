@@ -53,7 +53,6 @@ int particiona(elemento *elementos, int inicio, int final, int *movimentacoes, i
             dir--;
             (*comparacoes)++;
         }
-        (*comparacoes)++;
         if (esq < dir) {
             elemento aux = elementos[esq];
             elementos[esq] = elementos[dir];
@@ -70,7 +69,6 @@ int particiona(elemento *elementos, int inicio, int final, int *movimentacoes, i
 void quicksort(elemento *elementos, int inicio, int fim, int *movimentacoes, int *comparacoes) {
     int pivo;
     if (fim > inicio) {
-        (*comparacoes)++;
         pivo = particiona(elementos, inicio, fim, movimentacoes, comparacoes);
         quicksort(elementos, inicio, pivo - 1, movimentacoes, comparacoes);
         quicksort(elementos, pivo + 1, fim, movimentacoes, comparacoes);
@@ -84,7 +82,6 @@ void criaheap(elemento *elementos, int pai, int fim, int *movimentacoes, int *co
 
     int filho = 2 * pai + 1;
     while (filho <= fim) {
-        (*comparacoes)++;
         if (filho < fim) {
             (*comparacoes)++;
             if (elementos[filho].chave < elementos[filho + 1].chave) {
@@ -130,9 +127,8 @@ void merge(elemento *elementos, int inicio, int meio, int fim, int *movimentacoe
     elemento *temp = (elemento *)malloc(tamanho * sizeof(elemento));
     if (temp != NULL) {
         for (i = 0; i < tamanho; i++) {
-            (*comparacoes)++;
             if (!fim1 && !fim2) {
-                (*comparacoes)+=3;
+                (*comparacoes)++;
                 if (elementos[p1].chave < elementos[p2].chave) {
                     temp[i] = elementos[p1++];
                     (*movimentacoes)++;
@@ -149,7 +145,6 @@ void merge(elemento *elementos, int inicio, int meio, int fim, int *movimentacoe
                 }
             }
             else {
-                (*comparacoes)++;
                 if (!fim1) {
                     temp[i] = elementos[p1++];
                     (*movimentacoes)++;
@@ -171,7 +166,6 @@ void merge(elemento *elementos, int inicio, int meio, int fim, int *movimentacoe
 void mergesort(elemento *elementos, int inicio, int tamanho, int *movimentacoes, int *comparacoes) {
     int meio;
     if (inicio < tamanho) {
-        (*comparacoes)++;
         meio = floor((inicio + tamanho) / 2);
         mergesort(elementos, inicio, meio, movimentacoes, comparacoes);
         mergesort(elementos, meio + 1, tamanho, movimentacoes, comparacoes);
@@ -195,7 +189,7 @@ void shellsort(elemento *elementos, int tamanho, int *movimentacoes, int *compar
                 elementos[j] = elementos[j - intervalo];
                 (*movimentacoes)++;
                 j -= intervalo;
-                (*comparacoes) += 2;
+                (*comparacoes)++;
                 if (j <= intervalo) {
                     break;
                 }
