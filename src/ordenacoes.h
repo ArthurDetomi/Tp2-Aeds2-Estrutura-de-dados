@@ -5,6 +5,11 @@ struct elemento_tipo {
     int chave;
 } typedef elemento ;
 
+struct elemento_tipo_grande {
+    int chave;
+    char dado[50][50];
+} typedef elemento_grande ;
+
 enum algoritmos_ordenacao_tipo {
     SELECTION_SORT = 0,
     INSERTION_SORT = 1,
@@ -21,5 +26,12 @@ void shellsort(elemento *elementos, int tamanho, int *movimentacoes, int *compar
 void quicksort(elemento *elementos, int inicio, int fim, int *movimentacoes, int *comparacoes);
 void heapsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 void mergesort(elemento *elementos, int inicio, int tamanho, int *movimentacoes, int *comparacoes);
+
+void selectionsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
+void insertionsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
+void shellsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
+void quicksort_el_grande(elemento_grande *elementos_grande, int tamanho, int *movimentacoes, int *comparacoes); 
+void heapsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
+void mergesort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 
 #endif
