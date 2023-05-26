@@ -23,7 +23,7 @@ char *nome_ordenacoes_disponiveis(int num);
 void selectionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 void insertionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 void shellsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void quicksort(elemento *elementos, int inicio, int fim, int *movimentacoes, int *comparacoes);
+void quicksort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 void heapsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
 void mergesort(elemento *elementos, int inicio, int tamanho, int *movimentacoes, int *comparacoes);
 

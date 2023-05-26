@@ -42,47 +42,51 @@ void insertionsort(
     }
 }
 
-int particiona(
-    elemento *elementos, int inicio, int final, int *movimentacoes,
-    int *comparacoes
+void particiona(
+    int esq, int dir, int *i, int *j, elemento *elementos_grandes,
+    int *movimentacoes, int *comparacoes
 ) {
-    int esq, dir;
-    esq = inicio;
-    dir = final;
-    elemento pivo = elementos[(inicio + final + 1) / 2];
+    elemento x, w;
+    *i = esq;
+    *j = dir;
+    x = elementos_grandes[(*i + *j) / 2];
     (*movimentacoes)++;
-    while (esq < dir) {
-        while (esq <= final && elementos[esq].chave <= pivo.chave) {
-            esq++;
+    /* obtem o pivo x */
+    do {
+        while (*i <= dir && x.chave > elementos_grandes[*i].chave) {
+            (*i)++;
             (*comparacoes)++;
         }
-        while (dir >= 0 && elementos[dir].chave > pivo.chave) {
-            dir--;
+        while (*j >= esq && x.chave < elementos_grandes[*j].chave) {
+            (*j)--;
             (*comparacoes)++;
         }
-        if (esq < dir) {
-            elemento aux = elementos[esq];
-            elementos[esq] = elementos[dir];
-            elementos[dir] = aux;
+        if (*i <= *j) {
+            w = elementos_grandes[*i];
+            elementos_grandes[*i] = elementos_grandes[*j];
+            elementos_grandes[*j] = w;
             (*movimentacoes) += 3;
+            (*i)++;
+            (*j)--;
         }
-    }
-    elementos[inicio] = elementos[dir];
-    elementos[dir] = pivo;
-    (*movimentacoes) += 2;
-    return dir;
+    } while (*i <= *j);
+}
+
+void ordenar(
+    int esq, int dir, elemento *a, int *movimentacoes, int *comparacoes
+) {
+    int i, j;
+    particiona(esq, dir, &i, &j, a, movimentacoes, comparacoes);
+    if (esq < j)
+        ordenar(esq, j, a, movimentacoes, comparacoes);
+    if (i < dir)
+        ordenar(i, dir, a, movimentacoes, comparacoes);
 }
 
 void quicksort(
-    elemento *elementos, int inicio, int fim, int *movimentacoes,
-    int *comparacoes
+    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
 ) {
-    int pivo;
-    if (fim > inicio) {
-        pivo = particiona(elementos, inicio, fim, movimentacoes, comparacoes);
-        quicksort(elementos, inicio, pivo - 1, movimentacoes, comparacoes);
-        quicksort(elementos, pivo + 1, fim, movimentacoes, comparacoes);
-    }
+    ordenar(0, tamanho - 1, elementos, movimentacoes, comparacoes);
 }
 
 void criaheap(
@@ -304,22 +308,24 @@ void particiona_el_grande(
     } while (*i <= *j);
 }
 
-void ordenar(
+void ordenar_el_grande(
     int esq, int dir, elemento_grande *a, int *movimentacoes, int *comparacoes
 ) {
     int i, j;
     particiona_el_grande(esq, dir, &i, &j, a, movimentacoes, comparacoes);
     if (esq < j)
-        ordenar(esq, j, a, movimentacoes, comparacoes);
+        ordenar_el_grande(esq, j, a, movimentacoes, comparacoes);
     if (i < dir)
-        ordenar(i, dir, a, movimentacoes, comparacoes);
+        ordenar_el_grande(i, dir, a, movimentacoes, comparacoes);
 }
 
 void quicksort_el_grande(
     elemento_grande *elementos_grande, int tamanho, int *movimentacoes,
     int *comparacoes
 ) {
-    ordenar(0, tamanho - 1, elementos_grande, movimentacoes, comparacoes);
+    ordenar_el_grande(
+        0, tamanho - 1, elementos_grande, movimentacoes, comparacoes
+    );
 }
 
 void criaheap_el_grande(

@@ -79,10 +79,18 @@ void iniciar_teste_especifico(
     
     // verifica se vai gerar um array com elementos grandes ou não
     if (tamanho_el_teste == GRANDE) {
-        elementos_grande = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+        if (ordem_escolhida != ORDEM_ALEATORIA) {
+            elementos_grande = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+        } else {
+            elementos_grande = NULL;
+        }
         elementos = NULL;
     } else {
-        elementos = gerar_array(ordem_escolhida, tamanho);
+        if (ordem_escolhida != ORDEM_ALEATORIA) {
+            elementos = gerar_array(ordem_escolhida, tamanho);
+        } else {
+            elementos = NULL;
+        }
         elementos_grande = NULL;
     }
 
@@ -91,15 +99,25 @@ void iniciar_teste_especifico(
             for (int i = 0; i < 10; i++) {
                 tempo_inicial = clock();
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     insertionsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     insertionsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -111,15 +129,25 @@ void iniciar_teste_especifico(
         case SELECTION_SORT:
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     selectionsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     selectionsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -131,15 +159,25 @@ void iniciar_teste_especifico(
         case HEAP_SORT:
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     heapsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     heapsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -151,8 +189,13 @@ void iniciar_teste_especifico(
         case MERGE_SORT:
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     mergesort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -161,8 +204,13 @@ void iniciar_teste_especifico(
                         elementos_grande_aux = NULL;
                     }
                 } else { 
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     mergesort(elementos_aux, 0, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -174,17 +222,27 @@ void iniciar_teste_especifico(
         case QUICK_SORT:
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     quicksort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
-                    quicksort(elementos_aux, 0, tamanho, &movimentacoes, &comparacoes);
+                    quicksort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_aux);
                 }
@@ -194,15 +252,25 @@ void iniciar_teste_especifico(
         case SHELL_SORT:
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
-                    elemento_grande *elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
-                    memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    elemento_grande *elementos_grande_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
+                    } else {
+                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     shellsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
-                    elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
-                    memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    elemento *elementos_aux;
+                    if (ordem_escolhida != ORDEM_ALEATORIA) {
+                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
+                    } else {
+                        elementos_aux = gerar_array(ordem_escolhida, tamanho);
+                    }
                     tempo_inicial = clock();
                     shellsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
                     tempo_final = clock();
@@ -212,8 +280,8 @@ void iniciar_teste_especifico(
             }
         break;
     }
-    printf("Numero de comparacoes = %d\n", (comparacoes / 10));
-    printf("Numero de movimentacoes = %d\n", (movimentacoes / 10));
+    printf("Numero de comparacoes = %f\n", ( (double) comparacoes / 10.00));
+    printf("Numero de movimentacoes = %f\n", ((double) movimentacoes / 10.00));
     printf("Tempo decorrido = %f\n", (tempo_decorrido / 10.00));
     if (elementos_grande != NULL) {
         free(elementos_grande);
