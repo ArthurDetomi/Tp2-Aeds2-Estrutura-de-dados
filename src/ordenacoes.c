@@ -16,7 +16,6 @@ void selectionsort(
                 pos_menor = j;
             }
         }
-        (*comparacoes)++;
         if (pos_menor != i) {
             elemento aux = elementos[i];
             elementos[i] = elementos[pos_menor];
@@ -251,7 +250,6 @@ void selectionsort_el_grande(
                 pos_menor = j;
             }
         }
-        (*comparacoes)++;
         if (pos_menor != i) {
             elemento_grande aux = elementos[i];
             elementos[i] = elementos[pos_menor];

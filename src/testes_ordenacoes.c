@@ -280,8 +280,8 @@ void iniciar_teste_especifico(
             }
         break;
     }
-    printf("Numero de comparacoes = %f\n", ( (double) comparacoes / 10.00));
-    printf("Numero de movimentacoes = %f\n", ((double) movimentacoes / 10.00));
+    printf("Numero de comparacoes = %f\n", (comparacoes / 10.00));
+    printf("Numero de movimentacoes = %f\n", (movimentacoes / 10.00));
     printf("Tempo decorrido = %f\n", (tempo_decorrido / 10.00));
     if (elementos_grande != NULL) {
         free(elementos_grande);

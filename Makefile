@@ -16,7 +16,7 @@ endif
 
 CC=gcc -std=c17
 CCPP=g++ -std=c++17
-CFLAGS=-g
+CFLAGS=
 
 INCLUDE_DIRS=-I. $(foreach path,$(wildcard ./lib/*), -I$(path)/include/)
 LINK_DIRS=
