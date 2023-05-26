@@ -93,15 +93,16 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     insertionsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     insertionsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
@@ -112,15 +113,16 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     selectionsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     selectionsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
@@ -131,15 +133,16 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     heapsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     heapsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
@@ -150,6 +153,7 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     mergesort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     if (elementos_grande_aux != NULL) {
                         free(elementos_grande_aux);
                         elementos_grande_aux = NULL;
@@ -159,9 +163,9 @@ void iniciar_teste_especifico(
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     mergesort(elementos_aux, 0, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
@@ -172,15 +176,16 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     quicksort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     quicksort(elementos_aux, 0, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
@@ -191,15 +196,16 @@ void iniciar_teste_especifico(
                     memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     tempo_inicial = clock();
                     shellsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                     memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     tempo_inicial = clock();
                     shellsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
+                    tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_final = clock();
                 tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
         break;
