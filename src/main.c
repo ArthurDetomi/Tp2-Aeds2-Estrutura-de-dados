@@ -4,7 +4,7 @@
 #include <stdlib.h>
 
 int main(void) {
-    int algoritmo_escolha, cod_condicao;
+    int algoritmo_escolha, cod_condicao, cod_tamanho_el;
     printf("Bem vindo ao programa de testes de algoritmos de ordenacao\n");
     printf("Qual algoritmo deseja testar:\n");
     for (int i = 0; i < 6; i++) {
@@ -23,6 +23,11 @@ int main(void) {
     printf("Codigo :");
     scanf("%d", &cod_condicao);
     printf("\n");
-    iniciar_teste(algoritmo_escolha, cod_condicao);
+    printf("Tamanho dos elementos do teste:\n0:Pequeno\n1:Grande\n");
+    printf("Codigo :");
+    scanf("%d", &cod_tamanho_el);
+    printf("\n");
+
+    iniciar_teste(algoritmo_escolha, cod_condicao, cod_tamanho_el);
     return 0; 
 }
