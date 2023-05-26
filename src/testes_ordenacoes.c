@@ -17,6 +17,7 @@ elemento *gerar_array(tipo_ordenacao_teste tipo_ordenacao, int tamanho) {
     switch (tipo_ordenacao) {
         case ORDEM_ALEATORIA:
             for (int i = 0; i < tamanho; i++) {
+                srand(time(NULL));
                 int numero_aleatorio = rand() % tamanho + 1;
                 array[i].chave = numero_aleatorio;
             }
@@ -43,6 +44,7 @@ elemento_grande *gerar_array_elementos_grande(tipo_ordenacao_teste tipo_ordenaca
     switch (tipo_ordenacao) {
         case ORDEM_ALEATORIA:
             for (int i = 0; i < tamanho; i++) {
+                srand(time(NULL));
                 int numero_aleatorio = rand() % tamanho + 1;
                 array[i].chave = numero_aleatorio;
             }
