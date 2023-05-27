@@ -41,6 +41,8 @@ int main(void) {
     iniciar_teste(algoritmo_escolha, cod_condicao, cod_tamanho_el, arquivo);
 
     free(nome_ordenacao);
-    fclose(arquivo);
+    if (arquivo != NULL) {
+        fclose(arquivo);
+    }
     return 0; 
 }

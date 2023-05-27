@@ -108,6 +108,10 @@ void iniciar_teste_especifico(
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
                     elemento_grande *elementos_grande_aux;
+                    if (tamanho == TAM_200000) {
+                        fclose(arquivo);
+                        arquivo = NULL;
+                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_grande_aux);
@@ -121,6 +125,10 @@ void iniciar_teste_especifico(
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux;
+                    if (tamanho == TAM_200000) {
+                        fclose(arquivo);
+                        arquivo = NULL;
+                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_aux);
@@ -140,6 +148,10 @@ void iniciar_teste_especifico(
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
                     elemento_grande *elementos_grande_aux;
+                    if (tamanho == TAM_200000) {
+                        fclose(arquivo);
+                        arquivo = NULL;
+                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_grande_aux);
@@ -153,6 +165,10 @@ void iniciar_teste_especifico(
                     free(elementos_grande_aux);
                 } else {
                     elemento *elementos_aux;
+                    if (tamanho == TAM_200000) {
+                        fclose(arquivo);
+                        arquivo = NULL;
+                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_aux);
@@ -304,8 +320,9 @@ void iniciar_teste_especifico(
     printf("Numero de movimentacoes = %f\n", (movimentacoes / 10.00));
     printf("Tempo decorrido = %f\n", (tempo_decorrido / 10.00));
 
-    fprintf(arquivo, "\"%d\",\"%.6f\", \"%.6f\",\"%.6f\"\n", tamanho, tempo_decorrido, movimentacoes / 10.00, comparacoes / 10.00);
-
+    if (arquivo != NULL) {
+        fprintf(arquivo, "\"%d\",\"%.6f\", \"%.6f\",\"%.6f\"\n", tamanho, tempo_decorrido, movimentacoes / 10.00, comparacoes / 10.00);
+    }
     if (elementos_grande != NULL) {
         free(elementos_grande);
     }
