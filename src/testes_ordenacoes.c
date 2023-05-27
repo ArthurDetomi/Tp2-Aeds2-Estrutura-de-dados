@@ -4,7 +4,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/resource.h>
 #include <time.h>
 #define TAM_20 20
 #define TAM_500 500
@@ -12,8 +11,17 @@
 #define TAM_10000 10000
 #define TAM_200000 200000
 
+int verifica_se_alocacao_falhou(void *pointer) {   
+    if (pointer == NULL) {
+        printf("Erro em alocação");
+        exit(1);
+    }
+    return 0;
+}
+
 elemento *gerar_array(tipo_ordenacao_teste tipo_ordenacao, int tamanho) {
     elemento *array = (elemento *)malloc(tamanho * sizeof(elemento));
+    verifica_se_alocacao_falhou(array);
     switch (tipo_ordenacao) {
         case ORDEM_ALEATORIA:
             for (int i = 0; i < tamanho; i++) {
@@ -41,6 +49,7 @@ elemento *gerar_array(tipo_ordenacao_teste tipo_ordenacao, int tamanho) {
 
 elemento_grande *gerar_array_elementos_grande(tipo_ordenacao_teste tipo_ordenacao, int tamanho) {
     elemento_grande *array = (elemento_grande *)malloc(tamanho * sizeof(elemento_grande));
+    verifica_se_alocacao_falhou(array);
     switch (tipo_ordenacao) {
         case ORDEM_ALEATORIA:
             for (int i = 0; i < tamanho; i++) {
@@ -67,7 +76,7 @@ elemento_grande *gerar_array_elementos_grande(tipo_ordenacao_teste tipo_ordenaca
 }
 
 void iniciar_teste_especifico(
-    int tamanho, char *msg, algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolhida, tamanho_elemento_teste tamanho_el_teste
+    int tamanho, char *msg, algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolhida, tamanho_elemento_teste tamanho_el_teste, FILE *arquivo
 ) {
     int comparacoes = 0, movimentacoes = 0;
     clock_t tempo_inicial, tempo_final;
@@ -97,11 +106,11 @@ void iniciar_teste_especifico(
     switch (alg_escolhido) {
         case INSERTION_SORT:
             for (int i = 0; i < 10; i++) {
-                tempo_inicial = clock();
                 if (tamanho_el_teste == GRANDE) {
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -114,6 +123,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -132,6 +142,7 @@ void iniciar_teste_especifico(
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -144,6 +155,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -162,6 +174,7 @@ void iniciar_teste_especifico(
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -174,6 +187,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -192,6 +206,7 @@ void iniciar_teste_especifico(
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -207,6 +222,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -225,6 +241,7 @@ void iniciar_teste_especifico(
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -237,6 +254,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -255,6 +273,7 @@ void iniciar_teste_especifico(
                     elemento_grande *elementos_grande_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
                         elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
@@ -267,6 +286,7 @@ void iniciar_teste_especifico(
                     elemento *elementos_aux;
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
                         elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        verifica_se_alocacao_falhou(elementos_aux);
                         memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
                     } else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
@@ -283,6 +303,9 @@ void iniciar_teste_especifico(
     printf("Numero de comparacoes = %f\n", (comparacoes / 10.00));
     printf("Numero de movimentacoes = %f\n", (movimentacoes / 10.00));
     printf("Tempo decorrido = %f\n", (tempo_decorrido / 10.00));
+
+    fprintf(arquivo, "\"%d\",\"%.6f\", \"%.6f\",\"%.6f\"\n", tamanho, tempo_decorrido, movimentacoes / 10.00, comparacoes / 10.00);
+
     if (elementos_grande != NULL) {
         free(elementos_grande);
     }
@@ -291,16 +314,16 @@ void iniciar_teste_especifico(
     }
 }
 
-void iniciar_teste(algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolha, tamanho_elemento_teste tamanho_el_teste) {
+void iniciar_teste(algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolha, tamanho_elemento_teste tamanho_el_teste, FILE *arquivo) {
     if (ordem_escolha < 0 || ordem_escolha > 2 || alg_escolhido < 0 || alg_escolhido > 5) {
         printf("Erro: Codigos invalidos\n");
         return;
     }
-    iniciar_teste_especifico( TAM_20, "Teste com 20 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste);
-    iniciar_teste_especifico( TAM_500, "Teste com 500 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste);
-    iniciar_teste_especifico( TAM_5000, "Teste com 5000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste);
-    iniciar_teste_especifico( TAM_10000, "Teste com 10000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste);
-    iniciar_teste_especifico( TAM_200000, "Teste com 200000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste);
+    iniciar_teste_especifico( TAM_20, "Teste com 20 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
+    iniciar_teste_especifico( TAM_500, "Teste com 500 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
+    iniciar_teste_especifico( TAM_5000, "Teste com 5000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
+    iniciar_teste_especifico( TAM_10000, "Teste com 10000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
+    iniciar_teste_especifico( TAM_200000, "Teste com 200000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
 }
 
 char *nome_condicao_ordenacao(int num) {
@@ -310,6 +333,8 @@ char *nome_condicao_ordenacao(int num) {
     char condicoes[][50] = { "Ordem Aleatoria", "Ordem Crescente", "Ordem Decrescente" };
     int tam_str = strlen(condicoes[num]);
     char *nome_condicao = (char *)malloc((tam_str + 1) * sizeof(char));
+    verifica_se_alocacao_falhou(nome_condicao);
     strcpy(nome_condicao, condicoes[num]);
     return nome_condicao;
 }
+

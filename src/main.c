@@ -28,6 +28,19 @@ int main(void) {
     scanf("%d", &cod_tamanho_el);
     printf("\n");
 
-    iniciar_teste(algoritmo_escolha, cod_condicao, cod_tamanho_el);
+    char *nome_condicao = nome_condicao_ordenacao(cod_condicao);
+    char *nome_ordenacao = nome_ordenacoes_disponiveis(algoritmo_escolha);
+    char str[128];
+    sprintf(str, "resultado_teste_planilha/%s_%s_tam%d.csv", nome_condicao, nome_ordenacao, cod_tamanho_el);
+    FILE *arquivo = fopen(str, "w");
+    free(nome_condicao);
+
+    fprintf(arquivo, "\"Quantidade\",\"Tempo Decorrido\", \"Movimentacoes\",\"Comparacoes\"\n");
+    fflush(arquivo);
+
+    iniciar_teste(algoritmo_escolha, cod_condicao, cod_tamanho_el, arquivo);
+
+    free(nome_ordenacao);
+    fclose(arquivo);
     return 0; 
 }
