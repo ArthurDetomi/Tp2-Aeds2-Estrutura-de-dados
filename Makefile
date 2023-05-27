@@ -59,11 +59,12 @@ $(EXE): $(OBJ_DIR) $(OBJ)
 $(OBJ): $(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@ $(INCLUDE_DIRS) $(LINK_DIRS) $(LINKS) $(DEFINE)
 
+clean-testes:
+	rm -r ./resultado_teste_planilha/*.csv
 full-clean: clean
 
 clean:
 	$(RMRF) $(OBJ_DIR) $(EXE) $(SHARED_OBJECT) *.so $(DEV)
-
 $(DEV): $(HOST_SRC) $(SHARED_OBJECT)
 	$(CCPP) $(CFLAGS) $< -o $@ $(DEV_INCLUDE_DIRS) $(DEV_DEFINES)
 
