@@ -105,55 +105,69 @@ void iniciar_teste_especifico(
 
     switch (alg_escolhido) {
         case INSERTION_SORT:
+            if (tamanho == TAM_200000) {
+                fflush(arquivo);
+            }
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
                     elemento_grande *elementos_grande_aux;
-                    if (tamanho == TAM_200000) {
-                        fclose(arquivo);
-                        arquivo = NULL;
-                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
-                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        elementos_grande_aux = (elemento_grande *)
+                            malloc(sizeof(elemento_grande) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_grande_aux);
-                        memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
-                    } else {
-                        elementos_grande_aux = gerar_array_elementos_grande(ordem_escolhida, tamanho);
+                        memcpy(
+                            elementos_grande_aux, elementos_grande,
+                            sizeof(elemento_grande) * tamanho + 1
+                        );
+                    }
+                    else {
+                        elementos_grande_aux = gerar_array_elementos_grande(
+                            ordem_escolhida, tamanho
+                        );
                     }
                     tempo_inicial = clock();
-                    insertionsort_el_grande(elementos_grande_aux, tamanho, &movimentacoes, &comparacoes);
+                    insertionsort_el_grande(
+                        elementos_grande_aux, tamanho, &movimentacoes,
+                        &comparacoes
+                    );
                     tempo_final = clock();
                     free(elementos_grande_aux);
-                } else {
+                }
+                else {
                     elemento *elementos_aux;
-                    if (tamanho == TAM_200000) {
-                        fclose(arquivo);
-                        arquivo = NULL;
-                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
-                        elementos_aux = (elemento*) malloc(sizeof(elemento) * tamanho + 1);
+                        elementos_aux = (elemento *)
+                            malloc(sizeof(elemento) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_aux);
-                        memcpy(elementos_aux, elementos, sizeof(elemento) * tamanho + 1);
-                    } else {
+                        memcpy(
+                            elementos_aux, elementos,
+                            sizeof(elemento) * tamanho + 1
+                        );
+                    }
+                    else {
                         elementos_aux = gerar_array(ordem_escolhida, tamanho);
                     }
                     tempo_inicial = clock();
-                    insertionsort(elementos_aux, tamanho, &movimentacoes, &comparacoes);
+                    insertionsort(
+                        elementos_aux, tamanho, &movimentacoes, &comparacoes
+                    );
                     tempo_final = clock();
                     free(elementos_aux);
                 }
-                tempo_decorrido += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
+                tempo_decorrido
+                    += ((double)(tempo_final - tempo_inicial)) / CLOCKS_PER_SEC;
             }
-        break;
+            break;
         case SELECTION_SORT:
+            if (tamanho == TAM_200000) {
+                fflush(arquivo);
+            }
             for (int i = 0; i < 10; i++) {
                 if (tamanho_el_teste == GRANDE) {
                     elemento_grande *elementos_grande_aux;
-                    if (tamanho == TAM_200000) {
-                        fclose(arquivo);
-                        arquivo = NULL;
-                    }
                     if (ordem_escolhida != ORDEM_ALEATORIA) {
-                        elementos_grande_aux = (elemento_grande *) malloc(sizeof(elemento_grande) * tamanho + 1);
+                        elementos_grande_aux = (elemento_grande *)
+                            malloc(sizeof(elemento_grande) * tamanho + 1);
                         verifica_se_alocacao_falhou(elementos_grande_aux);
                         memcpy(elementos_grande_aux, elementos_grande, sizeof(elemento_grande) * tamanho + 1);
                     } else {
