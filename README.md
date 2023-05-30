@@ -8,3 +8,7 @@ make
 ```bash
 make clean
 ``` 
+### Limpar dados resultados de testes na planilha
+```bash
+make clean-testes
+```
