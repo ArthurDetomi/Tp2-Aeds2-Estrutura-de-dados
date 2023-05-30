@@ -6,7 +6,7 @@
 #include <string.h>
 
 void selectionsort(
-    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
+    elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     for (int i = 0; i < tamanho - 1; i++) {
         int pos_menor = i;
@@ -26,7 +26,7 @@ void selectionsort(
 }
 
 void insertionsort(
-    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
+    elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     int j;
     for (int i = 1; i < tamanho; i++) {
@@ -43,7 +43,7 @@ void insertionsort(
 
 void particiona(
     int esq, int dir, int *i, int *j, elemento *elementos_grandes,
-    int *movimentacoes, int *comparacoes
+    unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     elemento x, w;
     *i = esq;
@@ -72,7 +72,7 @@ void particiona(
 }
 
 void ordenar(
-    int esq, int dir, elemento *a, int *movimentacoes, int *comparacoes
+    int esq, int dir, elemento *a, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     int i, j;
     particiona(esq, dir, &i, &j, a, movimentacoes, comparacoes);
@@ -83,13 +83,13 @@ void ordenar(
 }
 
 void quicksort(
-    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
+    elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     ordenar(0, tamanho - 1, elementos, movimentacoes, comparacoes);
 }
 
 void criaheap(
-    elemento *elementos, int pai, int fim, int *movimentacoes, int *comparacoes
+    elemento *elementos, int pai, int fim, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     elemento aux = elementos[pai];
 
@@ -119,7 +119,7 @@ void criaheap(
 }
 
 void heapsort(
-    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
+    elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     int i;
     for (i = (tamanho - 1) / 2; i >= 0; i--) {
@@ -135,8 +135,8 @@ void heapsort(
 }
 
 void merge(
-    elemento *elementos, int inicio, int meio, int fim, int *movimentacoes,
-    int *comparacoes
+    elemento *elementos, int inicio, int meio, int fim, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int p1, p2, tamanho, i, j, k;
     int fim1 = 0, fim2 = 0;
@@ -184,8 +184,8 @@ void merge(
 }
 
 void mergesort(
-    elemento *elementos, int inicio, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento *elementos, int inicio, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int meio;
     if (inicio < tamanho) {
@@ -197,7 +197,7 @@ void mergesort(
 }
 
 void shellsort(
-    elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes
+    elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     int i, j;
     int intervalo = 1;
@@ -239,8 +239,8 @@ char *nome_ordenacoes_disponiveis(int num) {
 
 // Ordenações para o tipo elemento grande
 void selectionsort_el_grande(
-    elemento_grande *elementos, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     for (int i = 0; i < tamanho - 1; i++) {
         int pos_menor = i;
@@ -260,8 +260,8 @@ void selectionsort_el_grande(
 }
 
 void insertionsort_el_grande(
-    elemento_grande *elementos, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int j;
     for (int i = 1; i < tamanho; i++) {
@@ -278,7 +278,7 @@ void insertionsort_el_grande(
 
 void particiona_el_grande(
     int esq, int dir, int *i, int *j, elemento_grande *elementos_grandes,
-    int *movimentacoes, int *comparacoes
+    unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     elemento_grande x, w;
     *i = esq;
@@ -307,7 +307,7 @@ void particiona_el_grande(
 }
 
 void ordenar_el_grande(
-    int esq, int dir, elemento_grande *a, int *movimentacoes, int *comparacoes
+    int esq, int dir, elemento_grande *a, unsigned long *movimentacoes, unsigned long *comparacoes
 ) {
     int i, j;
     particiona_el_grande(esq, dir, &i, &j, a, movimentacoes, comparacoes);
@@ -318,8 +318,8 @@ void ordenar_el_grande(
 }
 
 void quicksort_el_grande(
-    elemento_grande *elementos_grande, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos_grande, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     ordenar_el_grande(
         0, tamanho - 1, elementos_grande, movimentacoes, comparacoes
@@ -327,8 +327,8 @@ void quicksort_el_grande(
 }
 
 void criaheap_el_grande(
-    elemento_grande *elementos, int pai, int fim, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos, int pai, int fim, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     elemento_grande aux = elementos[pai];
 
@@ -358,8 +358,8 @@ void criaheap_el_grande(
 }
 
 void heapsort_el_grande(
-    elemento_grande *elementos, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int i;
     for (i = (tamanho - 1) / 2; i >= 0; i--) {
@@ -377,8 +377,8 @@ void heapsort_el_grande(
 }
 
 void merge_el(
-    elemento_grande elementos_g[], int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande elementos_g[], int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int mid;
     int i, j, k;
@@ -429,8 +429,8 @@ void merge_el(
 }
 
 void mergesort_el_grande(
-    elemento_grande *elementos_g, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos_g, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int mid;
     if (tamanho > 1) {
@@ -444,8 +444,8 @@ void mergesort_el_grande(
 }
 
 void shellsort_el_grande(
-    elemento_grande *elementos, int tamanho, int *movimentacoes,
-    int *comparacoes
+    elemento_grande *elementos, int tamanho, unsigned long *movimentacoes,
+    unsigned long *comparacoes
 ) {
     int i, j;
     int intervalo = 1;

@@ -20,18 +20,18 @@ enum algoritmos_ordenacao_tipo {
 } typedef algoritmos_ordenacao ;
 
 char *nome_ordenacoes_disponiveis(int num);
-void selectionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void insertionsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void shellsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void quicksort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void heapsort(elemento *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void mergesort(elemento *elementos, int inicio, int tamanho, int *movimentacoes, int *comparacoes);
+void selectionsort(elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void insertionsort(elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void shellsort(elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void quicksort(elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void heapsort(elemento *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void mergesort(elemento *elementos, int inicio, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
 
-void selectionsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void insertionsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void shellsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void quicksort_el_grande(elemento_grande *elementos_grande, int tamanho, int *movimentacoes, int *comparacoes); 
-void heapsort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
-void mergesort_el_grande(elemento_grande *elementos, int tamanho, int *movimentacoes, int *comparacoes);
+void selectionsort_el_grande(elemento_grande *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void insertionsort_el_grande(elemento_grande *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void shellsort_el_grande(elemento_grande *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void quicksort_el_grande(elemento_grande *elementos_grande, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes); 
+void heapsort_el_grande(elemento_grande *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
+void mergesort_el_grande(elemento_grande *elementos, int tamanho, unsigned long *movimentacoes, unsigned long *comparacoes);
 
 #endif

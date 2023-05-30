@@ -11,7 +11,7 @@
 #define TAM_10000 10000
 #define TAM_200000 200000
 
-int verifica_se_alocacao_falhou(void *pointer) {   
+int verifica_se_alocacao_falhou(void *pointer) {
     if (pointer == NULL) {
         printf("Erro em alocação");
         exit(1);
@@ -76,9 +76,11 @@ elemento_grande *gerar_array_elementos_grande(tipo_ordenacao_teste tipo_ordenaca
 }
 
 void iniciar_teste_especifico(
-    int tamanho, char *msg, algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolhida, tamanho_elemento_teste tamanho_el_teste, FILE *arquivo
+    int tamanho, char *msg, algoritmos_ordenacao alg_escolhido,
+    tipo_ordenacao_teste ordem_escolhida,
+    tamanho_elemento_teste tamanho_el_teste, FILE *arquivo
 ) {
-    int comparacoes = 0, movimentacoes = 0;
+    unsigned long comparacoes = 0, movimentacoes = 0;
     clock_t tempo_inicial, tempo_final;
     double tempo_decorrido = 0;
     printf("\t%s\n", msg);
@@ -345,16 +347,36 @@ void iniciar_teste_especifico(
     }
 }
 
-void iniciar_teste(algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolha, tamanho_elemento_teste tamanho_el_teste, FILE *arquivo) {
-    if (ordem_escolha < 0 || ordem_escolha > 2 || alg_escolhido < 0 || alg_escolhido > 5) {
+void iniciar_teste(
+    algoritmos_ordenacao alg_escolhido, tipo_ordenacao_teste ordem_escolha,
+    tamanho_elemento_teste tamanho_el_teste, FILE *arquivo
+) {
+    if (ordem_escolha < 0 || ordem_escolha > 2 || alg_escolhido < 0
+        || alg_escolhido > 5)
+    {
         printf("Erro: Codigos invalidos\n");
         return;
     }
-    iniciar_teste_especifico( TAM_20, "Teste com 20 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
-    iniciar_teste_especifico( TAM_500, "Teste com 500 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
-    iniciar_teste_especifico( TAM_5000, "Teste com 5000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
-    iniciar_teste_especifico( TAM_10000, "Teste com 10000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
-    iniciar_teste_especifico( TAM_200000, "Teste com 200000 elementos", alg_escolhido, ordem_escolha, tamanho_el_teste, arquivo);
+    iniciar_teste_especifico(
+        TAM_20, "Teste com 20 elementos", alg_escolhido, ordem_escolha,
+        tamanho_el_teste, arquivo
+    );
+    iniciar_teste_especifico(
+        TAM_500, "Teste com 500 elementos", alg_escolhido, ordem_escolha,
+        tamanho_el_teste, arquivo
+    );
+    iniciar_teste_especifico(
+        TAM_5000, "Teste com 5000 elementos", alg_escolhido, ordem_escolha,
+        tamanho_el_teste, arquivo
+    );
+    iniciar_teste_especifico(
+        TAM_10000, "Teste com 10000 elementos", alg_escolhido, ordem_escolha,
+        tamanho_el_teste, arquivo
+    );
+    iniciar_teste_especifico(
+        TAM_200000, "Teste com 200000 elementos", alg_escolhido, ordem_escolha,
+        tamanho_el_teste, arquivo
+    );
 }
 
 char *nome_condicao_ordenacao(int num) {
@@ -368,4 +390,3 @@ char *nome_condicao_ordenacao(int num) {
     strcpy(nome_condicao, condicoes[num]);
     return nome_condicao;
 }
-
