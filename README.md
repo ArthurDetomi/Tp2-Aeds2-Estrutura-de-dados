@@ -12,3 +12,7 @@ make clean
 ```bash
 make clean-testes
 ```
+### Rodar o programa
+```bash
+./main
+```
